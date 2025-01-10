@@ -1,0 +1,69 @@
+/* alinear celdas de la tabla al centro */
+table.table-sm td,
+table.table-sm th {
+  vertical-align: middle;
+}
+
+/* Ajustes en el datatable */
+.dataTables_length {
+  margin-left: 20px;
+}
+#List td {
+  white-space: nowrap;
+  text-transform: capitalize;
+}
+#List td.precio {
+  white-space: nowrap;
+}
+#List td.ubicacion {
+  white-space: nowrap;
+}
+#List td.usuario {
+  white-space:normal;
+}
+#List td.acciones {
+  white-space: nowrap;
+}
+
+.dt-left {
+  display: flex;
+  justify-content: right;
+}
+
+
+/* moda dark css*/
+.dark-card-admin .table td, .dark-card-admin .table th {
+	border-top: 1px solid #363947;
+}
+.dark-card-admin .table td {
+	color: #929292;
+}
+.dark-grey-text, .dark-grey-text:focus, .dark-grey-text:hover {
+	color: #929292 !important;
+}
+.dark-card-admin .form-control {
+	background-color: #262a37;
+}
+
+@media (max-width: 767.98px) {
+  .dt-left {
+    justify-content: left;
+  }
+  div.dataTables_wrapper div .dataTables_filter {
+    text-align: left;
+  }
+
+  div.dataTables_wrapper div .dataTables_length {
+    text-align: left;
+  }
+}
+@media (max-width: 575.98px) {
+  .dataTables_length {
+    margin-left: initial;
+  }
+
+  .dt-left {
+    display: initial;
+    text-align: left;
+  }
+}

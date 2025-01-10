@@ -1,0 +1,4 @@
+src/app/Logs/php-error.log
+src/vendor
+src/.env
+src/.env-produccion

@@ -1,0 +1,15 @@
+.login-page .intro-2 {
+  background: url("../images/img.jpg") center center no-repeat;
+  background-size: cover;
+}
+
+.rgba-stylish-strong {
+  background-color: rgba(53, 107, 153, 0.77);
+  background: -webkit-linear-gradient(40deg, #45cafcdb, #303f9ff2);
+  background: linear-gradient(40deg, #45cafcdb, #303f9ff2);
+  background-attachment: scroll;
+}
+
+.login-page .card {
+  background-color: rgba(18, 28, 36, 0.79);
+}

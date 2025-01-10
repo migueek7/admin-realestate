@@ -1,0 +1,156 @@
+:root {
+  --primary-color: #4285f4;
+}
+
+.btn {
+  /* margin: 0; */
+  /* padding: 0.84rem 2rem; */
+}
+
+/* Spinner */
+.btn-sm .spinner-border {
+  height: 15px;
+  width: 15px;
+  display: flex;
+}
+
+.alert {
+  padding: .75rem;
+}
+
+/* eliminar el event de todos las etiquetas i */
+.btn i, .remove_image i {
+  pointer-events: none;
+}
+
+/* quitar margenes del main */
+.fixed-sn .page-footer .container-fluid,
+.fixed-sn main {
+  margin-right: 2%;
+  margin-left: 2%;
+}
+
+/* Capitalize los option select  */
+
+.dropdown-content li {
+  text-transform: capitalize;
+}
+
+/* Repara desborde de formulario al validarlo */
+.md-form input:not([type]),
+.md-form input[type="password"]:not(.browser-default),
+.md-form input[type="email"]:not(.browser-default),
+.md-form input[type="url"]:not(.browser-default),
+.md-form input[type="time"]:not(.browser-default),
+.md-form input[type="date"]:not(.browser-default),
+.md-form input[type="datetime"]:not(.browser-default),
+.md-form input[type="datetime-local"]:not(.browser-default),
+.md-form input[type="tel"]:not(.browser-default),
+.md-form input[type="number"]:not(.browser-default),
+.md-form input[type="search"]:not(.browser-default),
+.md-form input[type="search-md"],
+.md-form input[type="text"]:not(.browser-default),
+.md-form textarea.md-textarea {
+  box-sizing: border-box;
+}
+
+.md-form .form-control.is-invalid {
+  border-color: #f44336 !important;
+}
+.form-control.is-invalid, .was-validated .form-control:invalid {
+  border-color: #dc3545 !important;
+}
+
+/* Ajuste de altura select para que sea igual a input */
+.select-wrapper input.select-dropdown {
+  height: 41px;
+}
+
+table.dataTable thead .sorting::after,
+table.dataTable thead .sorting::before,
+table.dataTable thead .sorting_asc::after,
+table.dataTable thead .sorting_asc::before,
+table.dataTable thead .sorting_asc_disabled::after,
+table.dataTable thead .sorting_asc_disabled::before,
+table.dataTable thead .sorting_desc::after,
+table.dataTable thead .sorting_desc::before,
+table.dataTable thead .sorting_desc_disabled::after,
+table.dataTable thead .sorting_desc_disabled::before {
+  position: absolute;
+  bottom: 0.9em;
+  display: block;
+  opacity: 0.3;
+  font-family: Font Awesome 5 Pro !important;
+  font-weight: 900;
+  font-size: 1rem;
+}
+
+
+/* Load CSS Boton */
+.lds-ellipsis {
+  display: inline-block;
+  position: relative;
+  width: 70px;
+  /* height: 80px; */
+  height: 22px;
+  display: flex;
+  align-items: center;
+}
+.lds-ellipsis div {
+  position: absolute;
+  /* top: 33px; */
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #fff;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds-ellipsis div:nth-child(1) {
+  /* left: 8px; */
+  left: 6px;
+  animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+  /* left: 8px; */
+  left: 6px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+  /* left: 32px; */
+  left: 30px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+  /* left: 56px; */
+  left: 54px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+}
+@media (max-width: 394px) {
+  .change-mode {
+    flex-direction: inherit;
+  }
+}
