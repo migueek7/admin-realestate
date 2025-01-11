@@ -4,18 +4,15 @@
 /*                                    CORS                                    */
 /* -------------------------------------------------------------------------- */
 header('Access-Control-Allow-Origin: *');
-header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Authorization, Accept, Access-Control-Allow-Methods");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
-header("Allow: GET, POST, OPTIONS, PUT, DELETE");
-header("Access-Control-Allow-Credentials");
-$method = $_SERVER['REQUEST_METHOD'];
-if ($method == "OPTIONS") {
-    $json = [
-        'status' => 200,
-        'statuText' => "ok"
-    ];
-    echo json_encode($json, http_response_code($json["status"]));
-    return;
+// header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Authorization, Accept, Access-Control-Allow-Methods");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+// header("Allow: GET, POST, OPTIONS, PUT, DELETE");
+// header("Access-Control-Allow-Credentials", "true");
+// Manejar solicitudes preflight
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
 }
 
 /* -------------------------------------------------------------------------- */
@@ -60,8 +57,7 @@ $url = !empty($_GET['url']) ? rtrim($_GET['url'], '/') : '/';
 $arrayUrl = explode("/", strtolower($url));
 $ruta = strtolower($arrayUrl[0]);
 
-if (count($arrayUrl) == 1) {
-
+if (count($arrayUrl) == 1 && $arrayUrl[0] !== "index.php") {
     if ($_SERVER["REQUEST_URI"][-1] == '/') {
         header("Location: " . base_url() . substr($_SERVER["REQUEST_URI"], 0, -1));
         die();

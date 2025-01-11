@@ -4,12 +4,12 @@ import Delete from './delete.js';
 
 export default class Read {
 
-    constructor(token) {
+    constructor() {
         this.modules = new Modules();
         this.app = this.modules.app();
         this.folder = this.app.folder;
         //DataTable
-        let table = this.initDataTable(token);
+        let table = this.initDataTable();
         this.delete = new Delete(table);
         this.btnAction();
     }

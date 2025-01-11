@@ -33,7 +33,7 @@ export default class Update {
                 headers: {
                     Authorization: 'Bearer ' + this.token,
                 },
-                redirect: 'follow'
+                // redirect: 'follow'
             });
             if (!response.status) throw response;
             //await this.helpers.procesarError(response);

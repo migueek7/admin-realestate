@@ -29,45 +29,26 @@ export default class Read {
         this.btnAction();
     }
 
-    initDataTable(token) {
+    initDataTable() {
 
         const app = this.app;
-        const modules = this.modules;
-        const Token = this.token;
-        console.log("Token", Token);
+        // const Token = this.token;
+        // console.log("Token", Token);
 
         this.table = $('#dtMaterialDesignExample').DataTable({
-
             "ajax": {
-                processing: true,
-                serverSide: true,
                 url: app.apirest_url + "/user/",
                 type: "GET",
-                headers: {
-                    // 'Content-Type': 'application/json charset=utf-8',
-                    'Authorization': 'Bearer ' + Token
-                },
-                // dataSrc: 'data',
-                dataSrc: function (json) {
-                    // Aquí puede procesar la respuesta de la API antes de mostrarla en la tabla
-                    return json.data;
-                },
-                error: function (xhr, error, thrown) {
-                    // Aquí puede manejar el error que se produjo durante la solicitud
-                    // console.log('Se produjo un error: ', xhr.responseJSON);
-                    // alert('Se produjo un error: ' + xhr.responseJSON.message);
-
-                    if (xhr.responseJSON) {
-                        if (xhr.responseJSON.status !== "success") {
-                            const title = "Error";
-                            const text = xhr.responseJSON.message;
-                            const link = "/log-out"
-                            modules.sweetAlert(xhr.responseJSON.status, title, text, link);
-                        }
-                    } else {
-                        console.log(error);
-                    }
-                }
+                // headers: {
+                //     'Content-Type': 'application/json charset=utf-8',
+                //     'Authorization': 'Bearer ' + Token
+                // },
+                dataSrc: "data"
+            },
+            error: function (xhr, error, code) {
+                console.log(xhr);
+                console.log(error);
+                console.log(code);
             },
             "language": {
                 "processing": "Procesando...",

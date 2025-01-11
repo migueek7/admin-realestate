@@ -169,7 +169,7 @@ function strClean($strCadena)
 
 function getComponent($nombre, $data = null)
 {
-	$component = "./app/views/components/" . $nombre . ".php";
+	$component = "./app/Views/components/" . $nombre . ".php";
 	include($component);
 	return $data;
 }
