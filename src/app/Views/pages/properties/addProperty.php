@@ -241,11 +241,10 @@
                                 "id" => "priceForm",
                                 "text" => "Precio",
                                 "icon" => '<i class="prefix">$</i>',
-                                "type" => 'number',
                                 "required" => true
                             ];
                             isset($property) ? $propiedades["value"] = $property['price'] : null;
-                            getComponent("form/inputText", $propiedades);
+                            getComponent("form/inputPrice", $propiedades);
                             ?>
                         </div>
 
@@ -255,11 +254,10 @@
                                 "id" => "offerPriceForm",
                                 "text" => "Precio Oferta",
                                 "icon" => '<i class="prefix">$</i>',
-                                "type" => 'number',
                                 "required" => false
                             ];
                             isset($property) ? $propiedades["value"] = $property['offer_price'] : null;
-                            getComponent("form/inputText", $propiedades);
+                            getComponent("form/inputPrice", $propiedades);
                             ?>
                         </div>
 

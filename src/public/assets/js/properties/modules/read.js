@@ -328,8 +328,8 @@ export default class Read {
                         let response = ``;
                         if (data.offer_price > 0) {
                             response = `
-                                <span style="text-decoration-line: line-through; color: gray">$ ${modules.formatMoney(data.offer_price, data.currency)} ${data.currency}</span> <br>
-                                $ ${modules.formatMoney(data.price, data.currency)} ${data.currency}
+                                <span style="text-decoration-line: line-through; color: gray">$ ${modules.formatMoney(data.price, data.currency)} ${data.currency}</span> <br>
+                                $ ${modules.formatMoney(data.offer_price, data.currency)} ${data.currency}
                             `;
                         } else {
                             response = `

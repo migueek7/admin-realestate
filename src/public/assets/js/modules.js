@@ -379,11 +379,8 @@ export default class Modules {
     cleanInputToNumber(id) {
         document.getElementById(id).addEventListener('keyup', function (e) {
             e.preventDefault();
-            console.log("press key");
-            // formatNumber($(this));
             e.target.value.match(/\D/)
             let newValue = e.target.value.replace(/\D/g, '');
-            console.log(newValue);
             e.target.value = newValue;
         });
     }

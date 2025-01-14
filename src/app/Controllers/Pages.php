@@ -197,6 +197,7 @@ class Pages extends Controller
             'plugins/leaflet-locationpicker',
             'plugins/sweetalert2.all.min',
             'plugins/vendor/tinymce/tinymce.min',
+            'plugins/jquery.mask',
             // 'plugins/moment.min',
             // 'plugins/bootstrap-datetimepicker.min',
             'properties',
@@ -269,6 +270,7 @@ class Pages extends Controller
             'plugins/bootstrap-datetimepicker.min',
             // 'plugins/modules/material-select',
             'plugins/bootstrap-multiselect.min',
+            'plugins/jquery.mask',
             'properties',
             // 'addProperty',
             // 'updateProperty'

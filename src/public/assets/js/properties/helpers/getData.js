@@ -4,7 +4,19 @@ export default class GetData {
     /*                        Obtener Datos del Formulario                        */
     /* -------------------------------------------------------------------------- */
     getDataForm() {
-        const offer_price = Number(document.getElementById('offerPriceForm').value.trim());
+
+        /* -------------- Formateamos el precio y eliminamos las comas -------------- */
+
+        let price = document.getElementById('priceForm').value.trim();
+        price = price.replace(/,/g, '');
+        price = Number(price);
+
+        let offer_price = document.getElementById('offerPriceForm').value.trim();
+        offer_price = offer_price.replace(/,/g, '');
+        offer_price = Number(offer_price);
+
+        /* -------------------------- Almacenamos los datos ------------------------- */
+
         const dataForm = {
             "title": document.getElementById('titleForm').value.trim(),
             "extract": document.getElementById('extractForm').value.trim(),
@@ -14,7 +26,7 @@ export default class GetData {
             "coordinates": document.getElementById('coordinatesForm').value.trim(),
             "category_id": document.getElementById('categoriesForm').value.trim(),
             "price_text": document.getElementById('priceTextForm').value.trim(),
-            "price": document.getElementById('priceForm').value.trim(),
+            "price": price,
             "offer_price": offer_price > 0 ? offer_price : null,
             "currency_id": document.getElementById('currencyForm').value.trim(),
             "featured": document.getElementById('featuredForm').checked ? 1 : 0,

@@ -21,7 +21,7 @@ export default class Add {
         this.modules.InitMaterialSelect();
         this.modules.materialChipInit("featuresForm");
         this.modules.preventDefaultInputNumber();
-        this.modules.cleanInputToNumber("priceForm");
+        // this.modules.cleanInputToNumber("priceForm");
         this.modules.leafletLocationInit();
         this.app = this.modules.app();
 

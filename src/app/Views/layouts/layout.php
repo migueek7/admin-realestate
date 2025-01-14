@@ -14,12 +14,12 @@ if (isset($configSeo)) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="<?= $seoDescripcion; ?>">
     <meta name="keywords" content="<?= $seoKeywords; ?>">
-    <meta name="author" content="Erdwin Miguel Monje">
     <title><?= $seoTitle ?></title>
+
+    <link rel="icon" href="<?= images() ?>/favicon.ico" type="image/x-icon">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="<?= css() ?>/plugins/all.min.css">
-
 
     <?php if (isset($styles)) : foreach ($styles as $ruta) : ?>
             <link rel="stylesheet" href="<?= css() ?>/<?= $ruta; ?>.css">
