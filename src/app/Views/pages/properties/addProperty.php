@@ -249,6 +249,20 @@
                             ?>
                         </div>
 
+                        <div class="col-md-4 col-sm-6 precio">
+                            <?php
+                            $propiedades = [
+                                "id" => "offerPriceForm",
+                                "text" => "Precio Oferta",
+                                "icon" => '<i class="prefix">$</i>',
+                                "type" => 'number',
+                                "required" => false
+                            ];
+                            isset($property) ? $propiedades["value"] = $property['offer_price'] : null;
+                            getComponent("form/inputText", $propiedades);
+                            ?>
+                        </div>
+
                         <div class="col-md-4 col-sm-6">
                             <!-- Currency -->
                             <div class="d-flex selectCurrency">

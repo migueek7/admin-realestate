@@ -325,9 +325,18 @@ export default class Read {
                     "targets": 5,
                     "class": "precio",
                     "render": function (data) {
-                        return `
-                        $ ${modules.formatMoney(data.price, data.currency)} ${data.currency}
-                    `;
+                        let response = ``;
+                        if (data.offer_price > 0) {
+                            response = `
+                                <span style="text-decoration-line: line-through; color: gray">$ ${modules.formatMoney(data.offer_price, data.currency)} ${data.currency}</span> <br>
+                                $ ${modules.formatMoney(data.price, data.currency)} ${data.currency}
+                            `;
+                        } else {
+                            response = `
+                                $ ${modules.formatMoney(data.price, data.currency)} ${data.currency}
+                            `;
+                        }
+                        return response;
                     }
                 },
                 {
