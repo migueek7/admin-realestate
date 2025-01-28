@@ -12,6 +12,22 @@ export default class Category {
         this.add(token);
     }
 
+    getCategory() {
+        return fetch(this.app.apirest_url + "/property/categories", {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }).then(response => {
+            if (!response.ok) throw new Error(response.status);
+            return response.json();
+        }).then(data => {
+            return data;
+        }).catch(error => {
+            console.error("Error", error);
+        });
+    }
+
     /* -------------------------------------------------------------------------- */
     /*                              Agregar Categoria                             */
     /* -------------------------------------------------------------------------- */
@@ -31,12 +47,8 @@ export default class Category {
                 $(".alert").remove();
                 this.save(token, category, slug, cover);
             } else {
-                document.getElementById('messageAddCategory').innerHTML = `
-                    <div class="alert alert-danger" role="alert">
-                        <i class="far fa-exclamation-circle"></i> 
-                        Por favor rellena los campos obligatorios.
-                    </div>
-                `;
+                document.getElementById('messageAddCategory').innerHTML =
+                    this.helpers.getAlert("", "danger", 'Por favor rellena los campos obligatorios.');
                 this.helpers.buttonStatus('btnAddCategory', false, "Guardar");
             }
         }
@@ -62,25 +74,30 @@ export default class Category {
             if (!response.ok) throw await response.json();
 
             const res = await response.json();
-            console.log(res);
-
-            Swal.fire(
-                '¡Exito!',
-                `${res.message}`,
-                `${res.status}`
-            ).then((result) => {
-                $('#modalAddCategory').modal('hide')
-                document.getElementById('addCategoryForm').reset();
-                this.helpers.buttonStatus('btnAddCategory', "Guardar", false)
-                const id_category = res.data.id_category;
-                this.helpers.updateSelectCategories(category, id_category)
-            });
-
+            console.log("res", res);
+            if (res.status === "Created") {
+                Swal.fire(
+                    '¡Exito!',
+                    `${res.message}`,
+                    `success`
+                ).then((result) => {
+                    $('#modalAddCategory').modal('hide')
+                    document.getElementById('addCategoryForm').reset();
+                    this.helpers.buttonStatus('btnAddCategory', false, "Guardar")
+                    const id_category = res.data.id_category;
+                    this.helpers.updateSelectCategories(category, id_category)
+                });
+            }
         } catch (error) {
-
-            let data = await error.json();
-            this.helpers.showErrorAlert(data);
-            this.helpers.buttonStatus('btnAddCategory', false, "Guardar");
+            if (typeof error == "object" && error.status === "Conflict") {
+                document.getElementById('messageAddCategory').innerHTML = this.helpers.getAlert("", "danger", error.message);
+                // this.helpers.showErrorAlert(error);
+                this.helpers.buttonStatus('btnAddCategory', false, "Guardar");
+            } else {
+                this.helpers.showErrorAlert();
+                this.helpers.buttonStatus('btnAddCategory', false, "Guardar");
+            }
+            console.error("Error", error);
         }
     }
 

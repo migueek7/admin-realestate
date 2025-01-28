@@ -81,8 +81,6 @@ class Controller
             } else {
                 echo $token;
             }
-        } else {
-            echo "error no existe un token";
         }
     }
 }

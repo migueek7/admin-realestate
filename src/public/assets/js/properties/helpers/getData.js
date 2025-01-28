@@ -27,7 +27,7 @@ export default class GetData {
             "category_id": document.getElementById('categoriesForm').value.trim(),
             "price_text": document.getElementById('priceTextForm').value.trim(),
             "price": price,
-            "offer_price": offer_price > 0 ? offer_price : null,
+            "offer_price": offer_price > 0 ? offer_price : "",
             "currency_id": document.getElementById('currencyForm').value.trim(),
             "featured": document.getElementById('featuredForm').checked ? 1 : 0,
             "status_property": document.getElementById('statuForm').checked ? 1 : 0,
@@ -42,7 +42,8 @@ export default class GetData {
             "features": document.getElementById('featuresForm').value.trim(),
             "description": tinymce.get("descriptionForm").getContent().trim(),
             "image": document.getElementById('datosImagen').files[0],
-            "statusMultiple": String($('#myMultiselect').val()).split(",")
+            // "statusMultiple": String($('#myMultiselect').val()).split(",")
+            "statusMultiple": $('#myMultiselect').val()
         }
         if (document.getElementById('datetimepicker1')) {
             dataForm.updated_at_property = document.getElementById('datetimepicker1').value.trim()

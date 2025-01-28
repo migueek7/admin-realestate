@@ -221,6 +221,7 @@ class Pages extends Controller
         $currencies = $this->getRecursos("property/currencies", "GET");
         $users = $this->getRecursos("user/", "GET");
         //pre($users["data"]);
+        $folder = $this->getRecursos("property/folder", "GET");
 
         $this->templates->addData([
             'configSeo' => $configSeo,
@@ -230,7 +231,8 @@ class Pages extends Controller
             'subcategories' => $subcategories,
             'status' => $status,
             'currencies' => $currencies,
-            'users' => $users["data"]
+            'users' => $users["data"],
+            'folder' => $folder
         ]);
 
         echo $this->templates->render($this->preffix . '/properties/addProperty');
@@ -278,7 +280,7 @@ class Pages extends Controller
 
         $configSeo = [
             // "title"         => "Agregar Propiedad - " . $this->sitioweb,
-            "title"         => "Agregar Propiedad - ",
+            "title"         => "Actualizar Propiedad - ",
             "description"   => "descrion del home",
             "keywords"      => "palabras, claves",
             // "author"        => $this->author
@@ -287,7 +289,7 @@ class Pages extends Controller
         $categories = $this->getRecursos("property/categories", "GET");
         // pre($categories);
         $status = $this->getRecursos("property/status", "GET");
-        //pre($status);
+        // pre($status);
         $currencies = $this->getRecursos("property/currencies", "GET");
         //pre($currencies);
         $propertyDetails = $this->getRecursos("property/$idProperty", "GET");
@@ -296,8 +298,9 @@ class Pages extends Controller
         $users = $this->getRecursos("user/", "GET");
         // pre($users["data"]);
 
-        // $propertyDetails["description"] = htmlspecialchars($propertyDetails["description"]);
+        $folder = $this->getRecursos("property/folder", "GET");
 
+        // $propertyDetails["description"] = htmlspecialchars($propertyDetails["description"]);
 
         if (!$propertyDetails) {
             header('Location:' . $_ENV['BASE_URL'] . '/properties');
@@ -312,11 +315,59 @@ class Pages extends Controller
             'status' => $status,
             'currencies' => $currencies,
             'property' => $propertyDetails,
-            'users' => $users["data"]
+            'users' => $users["data"],
+            'folder' => $folder
         ]);
 
 
         echo $this->templates->render($this->preffix . '/properties/addProperty');
+    }
+
+    function categories()
+    {
+        $this->protectedPage();
+
+        $styles = [
+            'plugins/bootstrap.min',
+            'plugins/mdb.min',
+            'plugins/addons/datatables.min',
+            'plugins/addons/datatables-select.min'
+        ];
+
+        $scripts = [
+            'plugins/jquery-3.4.1.min',
+            'plugins/popper.min',
+            'plugins/bootstrap.min',
+            'plugins/mdb.min',
+            // 'main'
+        ];
+
+        $configSeo = [
+            "title"         => "Inicio - " . $this->sitioweb,
+            // "title"         => "Inicio - ",
+            "description"   => "descrion del home",
+            "keywords"      => "palabras, claves",
+            // "author"        => $this->author
+        ];
+
+        $categories = $this->getRecursos("property/categories", "GET");
+
+        $getDatatables = [
+            "Id" => "id_category",
+            "Categoria" => "category",
+            "Acciones" => null
+        ];
+
+        $this->templates->addData([
+            'configSeo' => $configSeo,
+            'styles' => $styles,
+            'scripts' => $scripts,
+            'categories' => $categories,
+            'datatables' => $getDatatables
+        ]);
+        //pre($users["data"]);
+
+        echo $this->templates->render($this->preffix . '/categories');
     }
 
     function prueba()

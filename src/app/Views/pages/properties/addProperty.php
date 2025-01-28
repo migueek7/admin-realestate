@@ -4,6 +4,7 @@
 <?php
 // isset($property) ? pre($property) : '';
 // isset($status) ? pre($status) : '';
+// isset($folder) ? pre($folder) : '';
 ?>
 
 <section class="container-xl container-fluid">
@@ -471,7 +472,15 @@
                     <div class="card-body card-body-cascade text-center">
                         <?php
                         isset($property) ? $portada = $property['image_property'] : $portada = null;
-                        getComponent("property/portada", ["id" => "datosImagen", "portada" => $portada, "carpeta" => "properties"]);
+                        getComponent(
+                            "property/portada",
+                            [
+                                "id" => "datosImagen",
+                                "portada" => $portada,
+                                "carpeta" => "properties",
+                                "folder" => $folder
+                            ]
+                        );
                         ?>
                     </div>
                 </div>
@@ -518,7 +527,7 @@
 
                 <div class="card-body pt-0">
 
-                    <?php if (isset($property)) { ?>
+                    <?php if (isset($property["images"])) { ?>
                         <input type="hidden" id="imagenes" data='<?= json_encode($property["images"], JSON_OBJECT_AS_ARRAY); ?>'>
 
                         <ul id="sortable3">
@@ -528,7 +537,7 @@
                                 foreach ($property["images"] as $key => $value) :
                             ?>
                                     <!-- <li class="col-lg-2 col-md-3 col-sm-4 col-6 mb-3 ui-state-default"> -->
-                                    <li class="ui-state-default" style="background-image: url(<?= apirest_url(); ?>/public/<?= folder_url() ?>/images/properties/<?= $value["name"]; ?>)" position="<?= $value["position"] ?>" imageid="<?= $value["id_image"] ?>">
+                                    <li class="ui-state-default" style="background-image: url(<?= apirest_url(); ?>/public/<?= $folder ?>/images/properties/<?= $value["name"]; ?>)" position="<?= $value["position"] ?>" imageid="<?= $value["id_image"] ?>">
                                         <a class="remove_image" image="<?= $value["name"]; ?>">
                                             <i class="fas fa-window-close"></i>
                                         </a>

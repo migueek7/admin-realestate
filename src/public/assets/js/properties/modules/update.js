@@ -77,10 +77,6 @@ export default class Update {
         localStorage.removeItem("dataProperty");
 
         const dataProperty = {
-            status: {
-                insert: [],
-                delete: []
-            },
             features: {
                 insert: [],
                 delete: []
@@ -95,10 +91,10 @@ export default class Update {
                 update: []
             },
             address: {
-                city: "",
-                suburb: "",
-                street: "",
-                coordinates: ""
+                city: document.getElementById('cityForm').value.trim(),
+                suburb: document.getElementById('suburbForm').value.trim(),
+                street: document.getElementById('streetForm').value.trim(),
+                coordinates: document.getElementById('coordinatesForm').value.trim()
             }
         }
         console.log("dataProperty", dataProperty);
@@ -137,10 +133,20 @@ export default class Update {
         this.deleteImages();
         this.btnCancel();
 
-        this.setDataAddress(dataProperty);
+        // this.setDataAddress(dataProperty);
         this.setDataImages(dataProperty);
 
         this.updateProperty(token);
+
+        /* -------------------------------- ADDREESS -------------------------------- */
+        this.cityFormChange();
+        this.suburbFormChange();
+        this.streetFormChange();
+        this.coordinatesFormChange();
+
+        /* --------------------------------- STATUS --------------------------------- */
+
+        this.statusFormChange();
     }
     /* -------------------------------------------------------------------------- */
     /*                        Obtener Imagenes Para Subir                         */
@@ -177,105 +183,65 @@ export default class Update {
         }
     }
 
-    setDataAddress(dataProperty) {
-        let dataAddress = this.getdata.getDataAddress();
-        console.log("dataAddress", dataAddress);
-        // let dataProperty = JSON.parse(localStorage.getItem("dataProperty"));
-
+    cityFormChange() {
         document.getElementById('cityForm').addEventListener('change', (e) => {
-            console.log("cambio direccion", e.target);
+            let dataProperty = JSON.parse(localStorage.getItem("dataProperty"));
             let value = e.target.value.trim();
-
-            if (dataAddress.city != value) {
-                dataProperty.address.city = value;
-
-                if (dataProperty.address.suburb.length == 0) {
-                    dataProperty.address.suburb = dataAddress.suburb;
-                }
-
-                if (dataProperty.address.street.length == 0) {
-                    dataProperty.address.street = dataAddress.street;
-                }
-
-                localStorage.setItem("dataProperty", JSON.stringify(dataProperty));
-            } else {
-                dataProperty.address.city = e.target.getAttribute('origin');
-                localStorage.setItem("dataProperty", JSON.stringify(dataProperty));
-            }
+            dataProperty.address.city = value;
+            localStorage.setItem("dataProperty", JSON.stringify(dataProperty));
         });
+    }
+
+    suburbFormChange() {
         document.getElementById('suburbForm').addEventListener('change', (e) => {
-            console.log("cambio direccion", e.target);
+            let dataProperty = JSON.parse(localStorage.getItem("dataProperty"));
             let value = e.target.value.trim();
-
-            if (dataAddress.suburb != value) {
-
-                if (dataProperty.address.city.length == 0) {
-                    dataProperty.address.city = dataAddress.city;
-                }
-
-                dataProperty.address.suburb = value;
-                if (dataProperty.address.street.length == 0) {
-                    dataProperty.address.street = dataAddress.street;
-                }
-
-                localStorage.setItem("dataProperty", JSON.stringify(dataProperty));
-            } else {
-                dataProperty.address.suburb = e.target.getAttribute('origin');
-                localStorage.setItem("dataProperty", JSON.stringify(dataProperty));
-            }
+            dataProperty.address.suburb = value;
+            localStorage.setItem("dataProperty", JSON.stringify(dataProperty));
         });
+    }
+
+    streetFormChange() {
         document.getElementById('streetForm').addEventListener('change', (e) => {
-            console.log("cambio direccion", e.target);
+            let dataProperty = JSON.parse(localStorage.getItem("dataProperty"));
             let value = e.target.value.trim();
+            dataProperty.address.street = value;
+            localStorage.setItem("dataProperty", JSON.stringify(dataProperty));
+        });
+    }
 
-            if (dataAddress.street != value) {
-
-                if (dataProperty.address.city.length == 0) {
-                    dataProperty.address.city = dataAddress.city;
-                }
-                if (dataProperty.address.suburb.length == 0) {
-                    dataProperty.address.suburb = dataAddress.suburb;
-                }
-                if (dataProperty.address.coordinates.length == 0) {
-                    dataProperty.address.street = dataAddress.coordinates;
-                }
-
-                dataProperty.address.street = value;
-                localStorage.setItem("dataProperty", JSON.stringify(dataProperty));
-            } else {
-                dataProperty.address.street = e.target.getAttribute('origin');
-                localStorage.setItem("dataProperty", JSON.stringify(dataProperty));
-            }
+    coordinatesFormChange() {
+        document.getElementById('coordinatesForm').addEventListener('change', (e) => {
+            let dataProperty = JSON.parse(localStorage.getItem("dataProperty"));
+            let value = e.target.value.trim();
+            dataProperty.address.coordinates = value;
+            localStorage.setItem("dataProperty", JSON.stringify(dataProperty));
         });
 
-        $(document).ready(function () {
+        $(function () {
             $('#coordinatesForm').leafletLocationPicker({
                 alwaysOpen: true,
                 mapContainer: "#fixedMapCont"
             }).on('changeLocation', function (e) {
+                let dataProperty = JSON.parse(localStorage.getItem("dataProperty"));
                 let value = e.target.value.trim();
+                dataProperty.address.coordinates = value;
+                localStorage.setItem("dataProperty", JSON.stringify(dataProperty));
                 console.log("cambio coordinatesForm", value);
-
-                if (dataAddress.coordinates != value) {
-
-                    if (dataProperty.address.city.length == 0) {
-                        dataProperty.address.city = dataAddress.city;
-                    }
-                    if (dataProperty.address.suburb.length == 0) {
-                        dataProperty.address.suburb = dataAddress.suburb;
-                    }
-                    if (dataProperty.address.street.length == 0) {
-                        dataProperty.address.street = dataAddress.street;
-                    }
-                    dataProperty.address.coordinates = value;
-                    localStorage.setItem("dataProperty", JSON.stringify(dataProperty));
-                } else {
-                    dataProperty.address.coordinates = e.target.getAttribute('origin');
-                    localStorage.setItem("dataProperty", JSON.stringify(dataProperty));
-                }
             });
         })
     }
+
+    statusFormChange() {
+        $('#myMultiselect').on('change', function () {
+            var values = $(this).val();
+            let dataProperty = JSON.parse(localStorage.getItem("dataProperty"));
+            dataProperty.statusMultiple = values;
+            console.log("myMultiselect", values)
+            localStorage.setItem("dataProperty", JSON.stringify(dataProperty));
+        });
+    }
+
     /* -------------------------------------------------------------------------- */
     /*                  Procesar Datos Para Actualizar Propiedad                  */
     /* -------------------------------------------------------------------------- */
@@ -308,7 +274,6 @@ export default class Update {
                     console.log("arrayImagesUpload", arrayImagesUpload);
                     dataProperty.images.upload = arrayImagesUpload;
                 }
-                // return;
                 let images = dataProperty.images;
                 let features = dataProperty.features;
                 let address = dataProperty.address;
@@ -319,7 +284,7 @@ export default class Update {
                 returnedTarget = Object.assign(datosForm, { "features": features });
                 returnedTarget = Object.assign(datosForm, { "address": address });
                 returnedTarget = Object.assign(datosForm, { "image": imgCover });
-                console.log(returnedTarget);
+                // console.log(returnedTarget);
 
                 this.updateProcess(token, returnedTarget);
 
@@ -351,10 +316,8 @@ export default class Update {
                     'Authorization': 'Bearer ' + token,
                     'Origin': this.app.base_url
                 },
-                body: JSON.stringify(returnedTarget),
-                redirect: 'follow'
+                body: JSON.stringify(returnedTarget)
             });
-
             if (!response.ok) throw response;
             const json = await response.json();
             const href = this.app.base_url + "/properties";
@@ -362,8 +325,15 @@ export default class Update {
 
         } catch (error) {
             console.log(error);
-            const json = await error.json();
-            this.helpers.showErrorAlert(json);
+            // comprobar si error traia un json
+            if (typeof error === 'object') {
+                const json = await error.json();
+                this.helpers.showErrorAlert(json);
+            } else {
+                this.helpers.showErrorAlert(error);
+            }
+            this.helpers.buttonStatus('btnSave', false, this.btnSaveText);
+        } finally {
             this.helpers.buttonStatus('btnSave', false, this.btnSaveText);
         }
     }
@@ -410,8 +380,6 @@ export default class Update {
     /*                 DETECTA EL CAMBIO DE ORDEN DE LAS IMAGENES                 */
     /* -------------------------------------------------------------------------- */
     changeOrderImages() {
-
-
         $("#sortable3").sortable({
             stop: function (event, ui) {
 
@@ -449,9 +417,5 @@ export default class Update {
                 e.target.parentElement.remove();
             });
         });
-    }
-
-    insertFeatures() {
-
     }
 }

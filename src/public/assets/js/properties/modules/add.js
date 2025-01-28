@@ -73,7 +73,7 @@ export default class Add {
             this.helpers.btnLoad('btnSave');
 
             const validaFormulario = this.validate.validaFormulario("FormInmueble");
-            const arrayFile = this.getArrayFile;
+            const arrayFile = this.arrayFile;
 
             if (validaFormulario) {
                 if (!this.validateImages(arrayFile)) return;
@@ -102,6 +102,9 @@ export default class Add {
             formData.append(element[0], element[1]);
         });
 
+        const myMultiselect = JSON.parse(localStorage.getItem('myMultiselect'));
+        formData.append("statusMultiple", myMultiselect);
+
         for (let i = 0; i < arrayFile.length; i++) {
             formData.append("images[]", arrayFile[i]);
         }
@@ -129,10 +132,10 @@ export default class Add {
             console.log(error);
             // comprobar si error traia un json
             if (typeof error === 'object') {
-                this.helpers.showErrorAlert(error);
-            } else {
                 const json = await error.json();
                 this.helpers.showErrorAlert(json);
+            } else {
+                this.helpers.showErrorAlert(error);
             }
             // console.log("error>>", error);
             // this.helpers.showErrorAlert(error);

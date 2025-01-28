@@ -66,8 +66,8 @@ export default class ValidateHelper {
             }
         });
 
-        // console.log("TOTAL INPUTS", totalInput);
-        // console.log("BANDERA", bandera);
+        console.log("TOTAL INPUTS", totalInput);
+        console.log("BANDERA", bandera);
 
         if (bandera < totalInput) {
             return false;

@@ -309,6 +309,7 @@ export default class Read {
                                 if (value.status_id == 2) color = "primary";
                                 if (value.status_id == 3) color = "danger";
                                 if (value.status_id == 5) color = "danger";
+                                if (value.status_id == 6) color = "success";
                                 template += `
                                     <span class="badge badge-pill badge-${color}" >
                                         ${value.status} 

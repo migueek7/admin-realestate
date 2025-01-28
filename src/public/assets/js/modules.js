@@ -11,11 +11,25 @@ export default class Modules {
         }
     }
 
+    async getFolder() {
+        try {
+            const base_url = window.location.origin;
+            const response = await fetch(base_url + "/get-folder", {
+                method: 'GET',
+                origin: base_url
+            });
+            let apirest = await response.text();
+            return apirest;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     app() {
         const app = {
             base_url: window.location.origin,
             apirest_url: localStorage.getItem('apirestUrl'),
-            folder: 'paraiso-dorado'
+            folder: localStorage.getItem('folder'),
         }
         return app;
     }
@@ -67,8 +81,16 @@ export default class Modules {
             $('.mdb-select').materialSelect({
                 validate: true
             });
-            var selectedValues = $('#myMultiselect').val();
-            console.log("selectedValues", selectedValues)
+            // $('#myMultiselect').on('change', function () {
+            //     var values = $(this).val();
+            //     console.log("myMultiselect", values)
+            //     // do whatever you want with 'values'
+            //     document.getElementById('myMultiselect').value = values;
+            //     localStorage.setItem("myMultiselect", JSON.stringify(values));
+            // });
+
+            // let selectedValues = $('#myMultiselect').val();
+            // console.log("selectedValues", selectedValues)
         });
     }
 

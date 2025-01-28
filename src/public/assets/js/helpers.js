@@ -149,7 +149,7 @@ export default class Helpers {
                     <i class="far ${icono} h4 m-0 pr-2"></i> 
 
                     <div>
-                        <strong class="text-capitalize">¡${error}! </strong> ${texto}
+                        <strong class="text-capitalize">${error ? error : ''} </strong> ${texto}
                     </div>
 
                     <button type="button" class="close ml-auto" data-dismiss="alert" aria-label="Close">

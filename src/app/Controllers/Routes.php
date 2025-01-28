@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class Routes
+class Routes extends Controller
 {
 
     function getRoutes()
@@ -10,6 +10,7 @@ class Routes
         $arrayRutas = [
             'Pages' => [
                 ["method" => "GET", "ruta" => "/", "function" => "blankPage"],
+                ["method" => "GET", "ruta" => "/categories", "function" => "categories"],
                 ["method" => "GET", "ruta" => "/properties", "function" => "properties"],
                 ["method" => "GET", "ruta" => "/datatables", "function" => "datatables"],
                 ["method" => "GET", "ruta" => "/add-property", "function" => "addProperty"],
@@ -34,6 +35,7 @@ class Routes
             ],
             'Routes' => [
                 ["method" => "GET", "ruta" => "/get-apirest", "function" => "getApirest"],
+                ["method" => "GET", "ruta" => "/get-folder", "function" => "getFolder"],
             ],
             'Mailer' => [
                 ["method" => "POST", "ruta" => "/mail", "function" => "enviarCorreo"],
@@ -47,5 +49,11 @@ class Routes
     function getApirest()
     {
         echo $_ENV["APIREST_URL"];
+    }
+
+    function getFolder()
+    {
+        $folder = $this->getRecursos("property/folder", "GET");
+        echo $folder;
     }
 }

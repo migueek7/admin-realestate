@@ -1,6 +1,6 @@
 <?php
-// pre($data);
-$images = apirest_url() . "/public/" . folder_url() . "/images/";
+$folder = isset($data["folder"]) ? $data["folder"] : null;
+$images = apirest_url() . "/public/" . $folder . "/images/";
 $carpeta = $data["carpeta"] . "/";
 $cover = isset($data["portada"]) && $data["portada"] != null ? $images . $carpeta . $data["portada"] : $images . $carpeta . "default.jpg";
 $idFileInput = isset($data) && $data["id"] != null ? $data["id"] : null;

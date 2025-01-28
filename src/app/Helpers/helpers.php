@@ -1,4 +1,7 @@
 <?php
+
+use App\Controllers\Controller;
+
 function name_site()
 {
 	return $_ENV['NAME_SITE'];
@@ -14,10 +17,6 @@ function base_url()
 function apirest_url()
 {
 	return $_ENV['APIREST_URL'];
-}
-function folder_url()
-{
-	return $_ENV['FOLDER_URL'];
 }
 function apikey()
 {

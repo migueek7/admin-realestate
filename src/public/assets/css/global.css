@@ -17,6 +17,9 @@
 .alert {
   padding: .75rem;
 }
+.alert-danger .close {
+  color: #721c24 !important;
+}
 
 /* eliminar el event de todos las etiquetas i */
 .btn i, .remove_image i {

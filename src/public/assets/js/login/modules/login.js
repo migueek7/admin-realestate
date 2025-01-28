@@ -46,6 +46,9 @@ export default class Login {
 
         const apirest_url = await this.modules.getApirest();
         localStorage.setItem('apirestUrl', apirest_url);
+
+        const folder = await this.modules.getFolder();
+        localStorage.setItem('folder', folder);
         // const apirest_url = await this.app.apirest_url
 
         try {
