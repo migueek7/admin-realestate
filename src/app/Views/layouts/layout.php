@@ -4,6 +4,10 @@ if (isset($configSeo)) {
     $seoDescripcion = isset($configSeo["description"]) ? $configSeo["description"] : '';
     $seoKeywords = isset($configSeo["keywords"]) ? $configSeo["keywords"] : '';
 }
+// Evitar que se guarde en caché
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 ?>
 <!DOCTYPE html>
 <html lang="es">
