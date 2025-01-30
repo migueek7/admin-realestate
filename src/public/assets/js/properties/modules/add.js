@@ -95,15 +95,11 @@ export default class Add {
     async saveProcess(token) {
         let formData = new FormData();
         const datosForm = this.getdata.getDataForm();
-        console.log("datosForm>>", datosForm);
         const arrayFile = this.arrayFile;
 
         Object.entries(datosForm).forEach((element, index) => {
             formData.append(element[0], element[1]);
         });
-
-        const myMultiselect = JSON.parse(localStorage.getItem('myMultiselect'));
-        formData.append("statusMultiple", myMultiselect);
 
         for (let i = 0; i < arrayFile.length; i++) {
             formData.append("images[]", arrayFile[i]);
