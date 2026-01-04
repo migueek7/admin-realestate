@@ -20,7 +20,7 @@ export default class Add {
         document.querySelector('.btnAgregar').onclick = (e) => {
             e.preventDefault();
 
-            document.getElementById('imgPortada').src = `${this.app.apirest_url}/public/${this.app.folder}/images/users/default.jpg`;
+            document.getElementById('imgPortada').src = `${this.app.uploads_url}/users/default.jpg`;
             document.getElementById('rolUser').disabled = false;
             // const form = document.getElementById("addUserForm");
             this.helpers.resetFormAndValidation("addUserForm");

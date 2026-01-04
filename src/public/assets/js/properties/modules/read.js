@@ -274,8 +274,8 @@ export default class Read {
                     "class": "imagen",
                     "render": function (data) {
                         return `
-                    <img loading="lazy" src="${app.apirest_url}/public/${app.folder}/images/properties/${data.image_property}" class="img-fluid" style="max-height: 50px">
-                `;
+                            <img loading="lazy" src="${app.uploads_url}/properties/${data.image_property}" class="img-fluid" style="max-height: 50px">
+                        `;
                     }
                 },
                 {

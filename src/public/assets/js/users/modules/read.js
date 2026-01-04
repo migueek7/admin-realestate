@@ -299,7 +299,7 @@ export default class Read {
                             let photo = data.photo != "" && data.photo != null ? data.photo : "default.jpg";
                             console.log("photo", photo);
                             return `
-                                <img src="${app.apirest_url}/public/${app.folder}/images/users/${photo}" class="img-fluid" style="max-height: 50px"/>
+                                <img src="${app.uploads_url}/users/${photo}" class="img-fluid" style="max-height: 50px"/>
                             `;
                         }
                 },
@@ -431,7 +431,7 @@ export default class Read {
 
     resetModalUser() {
         document.getElementById('addUserForm').reset();
-        document.getElementById('imgPortada').src = this.app.apirest_url + "/public/images/users/default.jpg";
+        document.getElementById('imgPortada').src = this.app.uploads_url + "/users/default.jpg";
         document.getElementById('tituloPrincipalModal').textContent = "Agregar Usuario";
         const form = document.getElementById("addUserForm");
         const rolInput = form.elements['rol'];

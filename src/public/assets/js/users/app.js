@@ -9,6 +9,7 @@ export default class App {
     constructor() {
         this.modules = new Modules();
         if (!localStorage.getItem('apirestUrl')) this.modules.getApirest();
+        if (!localStorage.getItem('uploadsUrl')) this.modules.getUploads();
     }
 
     async token() {

@@ -40,6 +40,9 @@ function images()
 {
 	return $_ENV['BASE_URL'] . "/public/assets/images";
 }
+function uploads() {
+	return $_ENV['APIREST_URL'] . "/public/uploads/" . $_ENV['FOLDER_URL'];
+}
 // retornar la url de tamplates
 function template()
 {
@@ -97,18 +100,6 @@ function getModal(string $nombreModal, $data = null)
 {
 	$vista_modal = "../views/sections/modals/" . $nombreModal . ".php";
 	require_once($vista_modal);
-}
-//SEPARAR PALABRAS CON ESPACIOS BREADCRUM
-function textoBreadcrum($texto)
-{
-	trim(array_reduce(
-		str_split($texto),
-		function ($c, $v) {
-			$c .= ctype_upper($v) ? ' ' . $v : $v;
-			echo $c;
-		}
-	));
-	// return $breadcrum;
 }
 //Enviar Email
 function sendEmail($data, $template)
@@ -190,7 +181,6 @@ function currencyConverter($amount)
 
 	// get the JSON data:
 	$json = curl_exec($ch);
-	curl_close($ch);
 
 	// Decode JSON response:
 	$conversionResult = json_decode($json, true);

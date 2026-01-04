@@ -49,6 +49,9 @@ export default class Login {
 
         const folder = await this.modules.getFolder();
         localStorage.setItem('folder', folder);
+
+        const uploads_url = await this.modules.getUploads();
+        localStorage.setItem('uploadsUrl', uploads_url);
         // const apirest_url = await this.app.apirest_url
 
         try {

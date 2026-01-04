@@ -36,6 +36,7 @@ class Routes extends Controller
             'Routes' => [
                 ["method" => "GET", "ruta" => "/get-apirest", "function" => "getApirest"],
                 ["method" => "GET", "ruta" => "/get-folder", "function" => "getFolder"],
+                ["method" => "GET", "ruta" => "/get-uploads", "function" => "getUploads"],
             ],
             'Mailer' => [
                 ["method" => "POST", "ruta" => "/mail", "function" => "enviarCorreo"],
@@ -55,5 +56,9 @@ class Routes extends Controller
     {
         $folder = $this->getRecursos("property/folder", "GET");
         echo $folder;
+    }
+
+    function getUploads() {
+        echo uploads();
     }
 }

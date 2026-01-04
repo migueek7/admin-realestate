@@ -106,7 +106,7 @@ export default class Update {
         /* --------------------- Insertamos la foto del usuario --------------------- */
 
         const photo = json.photo != "" ? json.photo : "default.jpg";
-        document.getElementById('imgPortada').src = `${this.app.apirest_url}/public/${this.app.folder}/images/users/${photo}`;
+        document.getElementById('imgPortada').src = `${this.app.uploads_url}/users/${photo}`;
 
         /* --------------- Controlamos lo que el usuario puede editar --------------- */
 

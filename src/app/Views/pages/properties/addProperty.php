@@ -537,7 +537,7 @@
                                 foreach ($property["images"] as $key => $value) :
                             ?>
                                     <!-- <li class="col-lg-2 col-md-3 col-sm-4 col-6 mb-3 ui-state-default"> -->
-                                    <li class="ui-state-default" style="background-image: url(<?= apirest_url(); ?>/public/<?= $folder ?>/images/properties/<?= $value["name"]; ?>)" position="<?= $value["position"] ?>" imageid="<?= $value["id_image"] ?>">
+                                    <li class="ui-state-default" style="background-image: url(<?= apirest_url(); ?>/public/uploads/<?= $folder ?>/properties/<?= $value["name"]; ?>)" position="<?= $value["position"] ?>" imageid="<?= $value["id_image"] ?>">
                                         <a class="remove_image" image="<?= $value["name"]; ?>">
                                             <i class="fas fa-window-close"></i>
                                         </a>

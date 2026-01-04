@@ -11,6 +11,17 @@ export default class Modules {
         }
     }
 
+    async getUploads() {
+        try {
+            const base_url = window.location.origin;
+            const response = await fetch(base_url + "/get-uploads", { method: 'GET' });
+            let uploadsUrl = await response.text();
+            return uploadsUrl;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     async getFolder() {
         try {
             const base_url = window.location.origin;
@@ -30,6 +41,7 @@ export default class Modules {
             base_url: window.location.origin,
             apirest_url: localStorage.getItem('apirestUrl'),
             folder: localStorage.getItem('folder'),
+            uploads_url: localStorage.getItem('uploadsUrl'),
         }
         return app;
     }
