@@ -72,14 +72,14 @@ export default class CoverHelper {
 
                     /* ------------------------ Validar peso de la imagen ----------------------- */
 
-                    if (Number(imagen["size"]) > 4194304) {
-                        console.log("imagen mayor a 4M")
+                    if (Number(imagen["size"]) > 6000000) {
+                        console.log("imagen mayor a 6MB")
                         $(".alert").remove();
                         cover.value = "";
                         respuestaFoto.innerHTML = `
                             <div class="alert alert-warning" role="alert">
                                 <i class="far fa-exclamation-circle"></i> 
-                                La imagen no debe pesar mas de 4MB.
+                                La imagen no debe pesar mas de 6MB.
                             </div>
                         `;
                         return;

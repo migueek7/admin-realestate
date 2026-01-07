@@ -1,5 +1,10 @@
+import Helpers from '../../helpers.js';
+
 export default class CoverHelper {
 
+    constructor() {
+        this.helpers = new Helpers();
+    }
     /* -------------------------------------------------------------------------- */
     /*                          CAMBIAR IMAGEN DEL UPLOAD                         */
     /* -------------------------------------------------------------------------- */
@@ -63,14 +68,14 @@ export default class CoverHelper {
 
                     /* ------------------------ Validar peso de la imagen ----------------------- */
 
-                    if (Number(imagen["size"]) > 4194304) {
-                        console.log("imagen mayor a 4M")
+                    if (Number(imagen["size"]) > 6000000) {
+                        console.log("imagen mayor a 6MB")
                         $(".alert").remove();
                         cover.value = "";
                         respuestaFoto.innerHTML = `
                             <div class="alert alert-warning" role="alert">
                                 <i class="far fa-exclamation-circle"></i> 
-                                La imagen no debe pesar mas de 5MB.
+                                La imagen no debe pesar mas de 6MB.
                             </div>
                         `;
                         return;
@@ -83,13 +88,16 @@ export default class CoverHelper {
                     let datosImagen = new FileReader;
                     datosImagen.readAsDataURL(imagen);
 
-                    datosImagen.onload = function (event) {
+                    datosImagen.onload = async function (event) {
                         let coverImage = event.target.result;
                         console.log(coverImage);
 
                         console.log("rutas", rutas);
                         if (rutas[0] == 'update-property') {
-                            saveDataPortada(coverImage, cover);
+                            // comprimimos la imagen para reducir tamaño
+                            this.helpers = new Helpers();
+                            const compressed = await this.helpers.compressDataUrl(coverImage, 'image/jpeg', 800, 0.7);
+                            saveDataPortada(compressed, cover); // guardamos la versión comprimida
                         }
 
                         let rutaImagen = event.target.result;
@@ -98,14 +106,21 @@ export default class CoverHelper {
 
                     const saveDataPortada = (coverImage) => {
 
-                        let nameCoverOld = cover.getAttribute('imagen');
-
-                        let arrayData = JSON.parse(localStorage.getItem('dataProperty'));
-
-                        arrayData.cover.delete = nameCoverOld;
-                        arrayData.cover.upload = coverImage;
-                        console.log(arrayData);
-                        localStorage.setItem('dataProperty', JSON.stringify(arrayData));
+                        try {
+                            let nameCoverOld = cover.getAttribute('imagen');
+                            let arrayData = JSON.parse(localStorage.getItem('dataProperty'));
+                            arrayData.cover.delete = nameCoverOld;
+                            arrayData.cover.upload = coverImage;
+                            console.log(arrayData);
+                            localStorage.setItem('dataProperty', JSON.stringify(arrayData));
+                        } catch (e) {
+                            console.error('Error al guardar en localStorage', e);
+                            if (e.name === 'QuotaExceededError' || e.code === 22) {
+                                // fallback: subir inmediatamente al servidor o notificar al usuario
+                                alert('La imagen es demasiado grande para guardarla localmente. Se subirá al servidor.');
+                                // aquí podrías enviar `coverImage` por fetch a tu endpoint de subida
+                            }
+                        }
                     }
                 }
             })
